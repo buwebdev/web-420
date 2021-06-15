@@ -147,4 +147,124 @@ router.post('/fruits', async(req, res) => {
     }
 })
 
+/**
+ * updateFruit
+ * @openapi
+ * /api/fruits/{id}:
+ *   put:
+ *     tags:
+ *       - Fruits
+ *     name: updateFruit
+ *     description: API for updating an existing document in MongoDB.
+ *     summary: Updates a document in MongoDB. 
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Id to filter the collection by. 
+ *         schema: 
+ *           type: string
+ *     requestBody:
+ *       description: Fruit information
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - type
+ *             properties:
+ *               type:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Fruit added
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.put('/fruits/:id', async (req, res) => {
+    try {
+        const fruitDocId = req.params.id; 
+
+        Fruit.findOne({'_id': fruitDocId}, function(err, fruit) {
+            if (err) {
+                console.log(err);
+                res.status(501).send({
+                    'message': `MongoDB Exception: ${err}`
+                })
+            } else {
+                console.log(fruit);
+
+                fruit.set({
+                    type: req.body.type
+                });
+
+                fruit.save(function(err, updatedFruit) {
+                    if (err) {
+                        console.log(err);
+                        res.json(updatedFruit);
+                    } else {
+                        console.log(updatedFruit);
+                        res.json(updatedFruit);
+                    }
+                })
+            }
+        })
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({
+            'message': `Server Exception: ${e.message}`
+        })
+    }
+})
+
+/**
+ * deleteFruit
+ * @openapi
+ * /api/fruits/{id}:
+ *   delete:
+ *     tags:
+ *       - Fruits
+ *     name: deleteFruit
+ *     description: API for deleting a document from MongoDB.
+ *     summary: Removes a document from MongoDB.
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Id of the document to remove. 
+ *         schema: 
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Fruit added
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.delete('/fruits/:id', async (req, res) => {
+    try {
+        const fruitDocId = req.params.id;
+
+        Fruit.findByIdAndDelete({'_id': fruitDocId}, function(err, fruit) {
+            if (err) {
+                console.log(err);
+                res.status(501).send({
+                    'message': `MongoDB Exception: ${err}`
+                })
+            } else {
+                console.log(fruit);
+                res.json(fruit);
+            }
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({
+            'message': `Server Exception: ${e.message}`
+        })
+    }
+})
+
 module.exports = router;
