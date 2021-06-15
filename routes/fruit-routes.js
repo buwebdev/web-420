@@ -12,6 +12,7 @@ const router = express.Router();
 const Fruit = require('../models/fruit');
 
 /**
+ * findAllFruits
  * @openapi
  * /api/fruits:
  *   get:
@@ -49,6 +50,7 @@ router.get('/fruits', async(req, res) => {
 })
 
 /**
+ * findFruitById
  * @openapi
  * /api/fruits/{id}:
  *   get:
@@ -93,6 +95,7 @@ router.get('/fruits/:id', async(req, res) => {
 })
 
 /**
+ * createFruit
  * @openapi
  * /api/fruits:
  *   post:

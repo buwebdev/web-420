@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({'extended': true}));
 
 /**
- * TODO: Added during week 3
+ * MongoDB Atlas connection string
  */
 const conn = 'mongodb+srv://superadmin:s3cret@cluster0.lujih.mongodb.net/web420DB?retryWrites=true&w=majority';
 mongoose.connect(conn, {
@@ -41,7 +41,6 @@ mongoose.connect(conn, {
 }).catch(err => {
     console.log(`MongoDB Error: ${err.message}`);
 })
-// TODO: end of week 3 items
 
 const options = {
     definition: {
