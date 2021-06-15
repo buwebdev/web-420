@@ -1,0 +1,25 @@
+openapi: "3.0.0"
+info:
+  title: FindById Example
+  version: 1.0.0
+paths:
+  /find/{id}:
+    get:
+      tags:
+        - YAML Examples
+      description: API for returning a single document from MongoDB.
+      summary: returns a single document.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id to filter the collection by.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: MongoDB Document
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

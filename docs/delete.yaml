@@ -1,0 +1,25 @@
+openapi: "3.0.0"
+info:
+  title: Delete Example
+  version: 1.0.0
+paths:
+  /delete/{id}:
+    delete:
+      tags:
+        - YAML Examples
+      description: API for deleting a document from MongoDB.
+      summary: Removes a document from MongoDB.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id of the document to remove.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: MongoDB Document
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

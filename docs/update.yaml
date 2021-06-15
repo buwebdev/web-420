@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+info:
+  title: Update Example
+  version: 1.0.0
+paths:
+  /update/{id}:
+    put:
+      tags:
+        - YAML Examples
+      description: API for updating an existing document in MongoDB.
+      summary: updates a document in MongoDB.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id to filter the collection by.
+          schema:
+            type: string
+      requestBody:
+        description: Object information.
+        content:
+          application/json:
+            schema:
+              required:
+                - userName
+              properties:
+                userName:
+                  type: string
+      responses:
+        '200':
+          description: MongoDB Document
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

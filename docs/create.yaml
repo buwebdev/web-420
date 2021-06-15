@@ -1,0 +1,28 @@
+openapi: "3.0.0"
+info:
+  title: Create Example
+  version: 1.0.0
+paths:
+  /create:
+    post:
+      tags:
+        - YAML Examples
+      description: API for adding a new record to MongoDB.
+      summary: Create a new MongoDB document.
+      requestBody:
+        description: Object information.
+        content:
+          application/json:
+            schema:
+              required:
+                - userName
+              properties:
+                userName:
+                  type: string
+      responses:
+        '200':
+          description: MongoDB Document
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

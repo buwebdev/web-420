@@ -1,0 +1,18 @@
+openapi: "3.0.0"
+info:
+  title: FindAll Example
+  version: 1.0.0
+paths:
+  /findAll:
+    get:
+      tags:
+        - YAML Examples
+      description: API for returning an array of documents.
+      summary: returns a list of documents.
+      responses:
+        '200':
+          description: MongoDB Document
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
